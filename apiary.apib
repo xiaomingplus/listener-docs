@@ -18,6 +18,7 @@ HOST: http://api.jiantingzhe.com/
             "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
             "tags": ["成绩", "四川大学"],
             "allow_set": true,
+            "need_verified": false,
             "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
         }
 
@@ -38,6 +39,7 @@ HOST: http://api.jiantingzhe.com/
                 "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
                 "tags": ["成绩", "四川大学"],
                 "allow_set": true,
+                "need_verified": false,
                 "is_subscribed": false,
                 "avatar": {
                     "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
@@ -72,6 +74,7 @@ HOST: http://api.jiantingzhe.com/
                             "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
                             "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
                         },
+                        "need_verified": false,
                         "last_message_posted": 1360782900,
                         "updated":1360782809,
                         "created":1360782804
@@ -98,6 +101,7 @@ HOST: http://api.jiantingzhe.com/
                         "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
                         "tags": ["成绩", "四川大学"],
                         "allow_set": true,
+                        "need_verified": false,
                         "is_subscribed": false,
                         "avatar": {
                             "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
@@ -124,6 +128,7 @@ HOST: http://api.jiantingzhe.com/
                 "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
                 "tags": ["成绩", "四川大学"],
                 "allow_set": true,
+                "need_verified": false,
                 "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
             }
 
@@ -140,6 +145,7 @@ HOST: http://api.jiantingzhe.com/
                         "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
                         "tags": ["成绩", "四川大学"],
                         "allow_set": true,
+                        "need_verified": false,
                         "is_subscribed": false,
                         "avatar": {
                             "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
@@ -150,6 +156,10 @@ HOST: http://api.jiantingzhe.com/
                         "created":1360782804
                 }
             }
+            
+            
+## 主题订阅用户列表 [/channels/{id}/users]
+
             
 ## 消息列表 [/messages]
 
@@ -166,9 +176,8 @@ HOST: http://api.jiantingzhe.com/
                 "pictures": [
                     "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
                 ],
-                "channel": {
-                    "id": "01234567-89ab-cdef-0123-456789abcdef"
-                }
+                "channel_id": "01234567-89ab-cdef-0123-456789abcdef",
+                "user_id": "01234567-89ab-cdef-0123-456789abcdef"
             }
 
 + Response 201 (application/json)
@@ -201,7 +210,7 @@ HOST: http://api.jiantingzhe.com/
                 }
             }            
 
-### 消息列表 [GET]
+### 公共消息列表 [GET]
 
 + Response 200 (application/json)
 
@@ -270,10 +279,19 @@ HOST: http://api.jiantingzhe.com/
                     }
                 ]
             }
+## 日志 [/logs]
+
+//todo
+
+## 搜索 [/search]
+
+//todo
 
 ## 订阅事件 [/subscribe-event]
 
 ### 订阅 [POST]
+
+当用户订阅某个channel时，系统将向channel拥有者推送一条如下的请求体，需返回200，如果5秒内没有响应，系统将重试3次。
 
 + Request
     
@@ -299,6 +317,8 @@ HOST: http://api.jiantingzhe.com/
 ## 取消订阅事件 [/unsubscribe-event]
 
 ### 取消订阅 [POST]
+
+当用户取消订阅某个channel时，系统将向channel拥有者推送一条如下的请求体，需返回200，如果5秒内没有响应，系统将重试3次。
 
 + Request
 
