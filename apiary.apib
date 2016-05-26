@@ -271,4 +271,52 @@ HOST: http://api.jiantingzhe.com/
                 ]
             }
 
-###
+## 订阅事件 [/subscribe-event]
+
+### 订阅 [POST]
+
++ Request
+    
+    + Body
+    
+            {   
+                "type": "channel_subscribed",
+                "channel": {
+                    "id": "01234567-89ab-cdef-0123-456789abcdef",
+                    "name: "出新的成绩了",
+                    "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                },
+                "user": {
+                    "id": "01234567-89ab-cdef-0123-456789abcdef",
+                    "name": "小明plus",
+                    "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                },
+                "created": 1360982804
+            }
+
++ Response 200 (application/json)
+            
+## 取消订阅事件 [/unsubscribe-event]
+
+### 取消订阅 [POST]
+
++ Request
+
+    + Body
+        
+            {
+                "type": "channel_ubsubscribed",
+                "channel": {
+                    "id": "01234567-89ab-cdef-0123-456789abcdef",
+                    "name: "出新的成绩了",
+                    "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                },
+                "user": {
+                    "id": "01234567-89ab-cdef-0123-456789abcdef",
+                    "name": "小明plus",
+                    "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                },
+                "created": 1360982804
+            }
+
++ Response 200 (application/json)
