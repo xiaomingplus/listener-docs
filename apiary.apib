@@ -5,9 +5,270 @@ HOST: http://api.jiantingzhe.com/
 
 帮你监听你关注的事。API文档
 
+## 主题 [/channels]
 
-## 主题相关 [/channels]
+### 创建新主题 [POST]
+
++ Request (application/json)
+
+        {
+            "alias": "scu_score",
+            "name": "出新的成绩了",
+            "prefix": "新成绩",
+            "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
+            "tags": ["成绩", "四川大学"],
+            "allow_set": true,
+            "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /channels/01234567-89ab-cdef-0123-456789abcdef
+            
+            
+    + Body
+
+            {
+                "id": "01234567-89ab-cdef-0123-456789abcdef",
+                "alias": "scu_score",
+                "name": "出新的成绩了",
+                "prefix": "新成绩",
+                "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
+                "tags": ["成绩", "四川大学"],
+                "allow_set": true,
+                "is_subscribed": false,
+                "avatar": {
+                    "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
+                    "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
+                },
+                "last_message_posted": 1360782900,
+                "updated":1360782804,
+                "created":1360782804
+            }
 
 
 
-## 推送相关 [/messages]
+### 最新主题列表 [GET]
+
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "channels": [
+                    {
+                        "id": "01234567-89ab-cdef-0123-456789abcdef",
+                        "alias": "scu_score",
+                        "name": "出新的成绩了",
+                        "prefix": "新成绩",
+                        "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
+                        "tags": ["成绩", "四川大学"],
+                        "allow_set": true,
+                        "is_subscribed": false,
+                        "avatar": {
+                            "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
+                            "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
+                        },
+                        "last_message_posted": 1360782900,
+                        "updated":1360782809,
+                        "created":1360782804
+                    }
+                ]
+                
+            }
+
+## 主题查看/修改 [/channels/{id}]
+
+### 主题详情 [GET]
+
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "channels": {
+                        "id": "01234567-89ab-cdef-0123-456789abcdef",
+                        "alias": "scu_score",
+                        "name": "出新的成绩了",
+                        "prefix": "新成绩",
+                        "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
+                        "tags": ["成绩", "四川大学"],
+                        "allow_set": true,
+                        "is_subscribed": false,
+                        "avatar": {
+                            "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
+                            "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
+                        },
+                        "last_message_posted": 1360782900,
+                        "updated":1360782809,
+                        "created":1360782804
+                }
+            }
+
+
+### 主题修改 [PATCH]
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "id": "01234567-89ab-cdef-0123-456789abcdef",
+                "alias": "scu_score",
+                "name": "出新的成绩了",
+                "prefix": "新成绩",
+                "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
+                "tags": ["成绩", "四川大学"],
+                "allow_set": true,
+                "avatar": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+            }
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "channels": {
+                        "id": "01234567-89ab-cdef-0123-456789abcdef",
+                        "alias": "scu_score",
+                        "name": "出新的成绩了",
+                        "prefix": "新成绩",
+                        "description": "对接四川大学本科教务处，一旦你有新的成绩出来，就会自动推送给你新成绩的分数。",
+                        "tags": ["成绩", "四川大学"],
+                        "allow_set": true,
+                        "is_subscribed": false,
+                        "avatar": {
+                            "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
+                            "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
+                        },
+                        "last_message_posted": 1360782900,
+                        "updated":1360782809,
+                        "created":1360782804
+                }
+            }
+            
+## 消息列表 [/messages]
+
+### 创建消息 [POST]
+
++ Request (application/json)
+
+    + Body
+            
+            {
+                "type": "link",
+                "link_url": "http://article.jiantingzhe.com/post/1"
+                "text": "成绩更新设置指南",
+                "pictures": [
+                    "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                ],
+                "channel": {
+                    "id": "01234567-89ab-cdef-0123-456789abcdef"
+                }
+            }
+
++ Response 201 (application/json)
+
+    + Body
+    
+            {
+                "messages": {
+                        "id": "01234567-89ab-cdef-0123-456789abcdef",
+                        "type": "link",
+                        "link_url": "http://article.jiantingzhe.com/post/1",
+                        "text": "成绩更新设置指南",
+                        "pictures": [
+                            {
+                                "thumbnail": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png",
+                                "middle": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/middle.png",
+                                "large": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                            }
+                        ],
+                        "channel": {
+                            "id": "01234567-89ab-cdef-0123-456789abcdef",
+                            "name": "出新的成绩了",
+                            "avatar": {
+                                "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
+                                "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
+                            }
+                        },
+                        "created":1360982804,
+                        "updated":1360982804
+                }
+            }            
+
+### 消息列表 [GET]
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "messages": [
+                    {
+                        "id": "01234567-89ab-cdef-0123-456789abcdef",
+                        "type": "link",
+                        "link_url": "http://article.jiantingzhe.com/post/1",
+                        "text": "成绩更新设置指南",
+                        "pictures": [
+                            {
+                                "thumbnail": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png",
+                                "middle": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/middle.png",
+                                "large": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                            }
+                        ],
+                        "channel": {
+                            "id": "01234567-89ab-cdef-0123-456789abcdef",
+                            "name": "出新的成绩了",
+                            "avatar": {
+                                "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
+                                "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
+                            }
+                        },
+                        "created":1360982804,
+                        "updated":1360982804
+                    }
+                ]
+            }
+            
+## 用户消息列表 [/user/{id}/messages]
+
+### 消息列表 [GET]
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "messages": [
+                    {
+                        "id": "01234567-89ab-cdef-0123-456789abcdef",
+                        "type": "link",
+                        "link_url": "http://article.jiantingzhe.com/post/1",
+                        "text": "成绩更新设置指南",
+                        "pictures": [
+                            {
+                                "thumbnail": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png",
+                                "middle": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/middle.png",
+                                "large": "http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png"
+                            }
+                        ],
+                        "channel": {
+                            "id": "01234567-89ab-cdef-0123-456789abcdef",
+                            "name": "出新的成绩了",
+                            "avatar": {
+                                "large":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/large.png",
+                                "thumbnail":"http://static.jiantingzhe.com/pic/01234567-89ab-cdef-0123-456789abcdef/thumbnail.png"
+                            }
+                        },
+                        "created":1360982804,
+                        "updated":1360982804
+                    }
+                ]
+            }
+
+###
